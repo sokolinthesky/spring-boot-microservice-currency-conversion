@@ -15,5 +15,5 @@ GET to http://localhost:8100/currency-converter/from/EUR/to/INR/quantity/10000
   port: 8000,
 }
 
-The diagram below shows the communication between CCS and FS.
+The diagram below shows the communication between CCS and FS.<br>
 <img src="http://www.springboottutorial.com/images/Spring-Boot-Microservice-1-CCS-FS.png"/>
