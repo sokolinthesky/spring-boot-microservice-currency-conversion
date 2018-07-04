@@ -3,7 +3,7 @@ Currency Conversion Service (CCS) can convert a bucket of currencies into anothe
 
 An example request and response is shown below:
 
-GET to http://localhost:8100/currency-converter/from/EUR/to/INR/quantity/10000 Using RestTemplate
+GET to http://localhost:8100/currency-converter/from/EUR/to/INR/quantity/10000 Using RestTemplate<br>
 GET to http://localhost:8100/currency-converter-feign/from/EUR/to/INR/quantity/10000 Using Feign Clients
 
 {
