@@ -1,10 +1,11 @@
 spring.application.name: currency-conversion-service
 server.port: 8100
 
+# set TRUE for using ribbon + eureka, ribbon will get urls from eureka
 ribbon:
   eureka:
     enabled: false
-
+# using ribbon without eureka service discovery
 forexclient:
   ribbon:
     listOfServers: http://localhost:8000
