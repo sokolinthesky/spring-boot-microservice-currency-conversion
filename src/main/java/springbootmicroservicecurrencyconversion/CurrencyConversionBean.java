@@ -1,4 +1,4 @@
-package com.microservice.example.currencyconversion.springbootmicroservicecurrencyconversion;
+package springbootmicroservicecurrencyconversion;
 
 import java.math.BigDecimal;
 

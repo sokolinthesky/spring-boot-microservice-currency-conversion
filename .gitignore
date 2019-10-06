@@ -1,6 +1,8 @@
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
 
 ### STS ###
 .apt_generated
@@ -16,12 +18,14 @@
 *.iws
 *.iml
 *.ipr
-/out/
 
 ### NetBeans ###
 /nbproject/private/
-/build/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/

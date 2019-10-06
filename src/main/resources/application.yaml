@@ -1,0 +1,10 @@
+spring.application.name: currency-conversion-service
+server.port: 8100
+
+ribbon:
+  eureka:
+    enabled: false
+
+forexclient:
+  ribbon:
+    listOfServers: http://localhost:8000

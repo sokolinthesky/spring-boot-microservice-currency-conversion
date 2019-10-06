@@ -1,9 +1,7 @@
-package com.microservice.example.currencyconversion.springbootmicroservicecurrencyconversion;
+package springbootmicroservicecurrencyconversion;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.forexservice.client.exchange.ExchangeDto;
+import com.forexservice.client.exchange.ForexClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 public class CurrencyConversionController {
 
@@ -20,6 +22,8 @@ public class CurrencyConversionController {
 
     @Autowired
     private CurrencyExchangeServiceProxy proxy;
+    @Autowired
+    private ForexClient forexClient;
 
     //use rest template
     @GetMapping("/currency-converter/from/{from}/to/{to}/quantity/{quantity}")
@@ -40,6 +44,9 @@ public class CurrencyConversionController {
                 quantity.multiply(response.getConversionMultiple()), response.getPort());
     }
 
+    /**
+     * Uses own feign client
+     */
     //use Feign Proxy
     @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
@@ -51,5 +58,20 @@ public class CurrencyConversionController {
 
         return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
                 quantity.multiply(response.getConversionMultiple()), response.getPort());
+    }
+
+    /**
+     * Uses external client
+     */
+    @GetMapping("/currency-converter-feign-dto/from/{from}/to/{to}/quantity/{quantity}")
+    public CurrencyConversionBean convertCurrencyFeignDto(@PathVariable String from, @PathVariable String to,
+                                                          @PathVariable BigDecimal quantity) {
+
+        ExchangeDto dto = forexClient.retrieveExchangeValueDto(from, to);
+
+        logger.info("{}", dto);
+
+        return new CurrencyConversionBean(dto.getId(), from, to, dto.getConversionMultiple(), quantity,
+                quantity.multiply(dto.getConversionMultiple()), dto.getPort());
     }
 }
